@@ -1,24 +1,5 @@
-// const assert = require('assert');
-// const {Builder, Key, By, until} = require('selenium-webdriver');
-//
-// (async function test() {
-//     let driver = await new Builder().forBrowser('firefox').build();
-//     try {
-//         await driver.get("https://edurio.com/poll/TftMJA");
-//         await driver.findElement(By.xpath(".//div[@class='accept-btn']")).click()
-//
-//     } finally {
-//         //await driver.quit();
-//     }
-// })();
-
-// recommendation from net:
-// var window = new webdriver.WebDriver.Window(driver);
-// window.maximize();
-
 const {Builder, By, until} = require("selenium-webdriver");
 const nextBtn = By.xpath(".//button[@class = 'btn btn-full nw-survey-filing-next-link']")
-
 
 async function runTest() {
     let driver = await new Builder().forBrowser("chrome").build();
@@ -42,7 +23,6 @@ async function runTest() {
     // Step 5 - Once the page loads, select the option “Quite satisfied”
     await driver.wait(until.elementLocated(By.xpath(".//span[text() = 'Quite satisfied']")), 10000);
     await driver.findElement(By.xpath(".//span[text() = 'Quite satisfied']")).click();
-
 
     // Step 6 - Click on the “Click here to further explain or specify your answer” element
     await driver.executeScript("arguments[0].scrollIntoView();", driver.findElement(By.xpath(".//div[@class = 'poll-comment']")));
@@ -86,11 +66,6 @@ async function runTest() {
 
     // Step 17 - On the confirmation modal click the button “Finish survey”
     await driver.wait(until.elementLocated(By.xpath(".//button[@class = 'modal-default-button']")), 10000).click();
-
-    // // }
-    // // finally {
-    // //     await driver.quit();
-    // // }
 
 }
 
