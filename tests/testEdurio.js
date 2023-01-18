@@ -10,6 +10,14 @@ async function runTest() {
         return driver.wait(until.elementLocated(locator), 10000).click();
     }
 
+    function scroll(px){
+        return driver.executeScript("window.scrollBy(0," + px + ")")
+    }
+
+    function wait(locator){
+        return driver.executeScript("arguments[0].scrollIntoView();", driver.findElement(locator))
+    }
+
     let driver = await new Builder().forBrowser("chrome").build();
     // window.maximize();
 
@@ -18,10 +26,10 @@ async function runTest() {
     console.log("The survey is opened")
 
     // Step 2 - Accept cookies by clicking “OK”
-    await driver.findElement(By.xpath(".//div[@class='accept-btn']")).click();
+    await click(By.xpath(".//div[@class='accept-btn']"));
 
     // Step 3 - Click the button “Start the poll”
-    await driver.executeScript("window.scrollBy(0,100)")
+    await scroll(200)
     await click(By.xpath(".//button[text() = 'Start the survey']"));
     // await driver.wait(until.elementLocated(By.xpath(".//button[text() = 'Start the survey']")), 10000).click();
 
@@ -30,11 +38,12 @@ async function runTest() {
     await click(nextBtn);
 
     // Step 5 - Once the page loads, select the option “Quite satisfied”
-    await driver.executeScript("window.scrollBy(0,200)")
+    await wait(By.xpath(".//div[@class = 'poll-question multichoice_radio']"));
+    await scroll(200);
     await click(By.xpath(".//span[text() = 'Quite satisfied']"));
 
     // Step 6 - Click on the “Click here to further explain or specify your answer” element
-    await driver.executeScript("arguments[0].scrollIntoView();", driver.findElement(By.xpath(".//div[@class = 'poll-comment']")));
+    await scroll(200);
     await click(By.xpath(".//div[@class = 'poll-comment']"));
 
     // Step 7 - In the input field that appeared insert the text “We joined only 3 months ago.”
@@ -44,8 +53,8 @@ async function runTest() {
     await click(nextBtn);
 
     // Step 9 - Once the page loads, select the option “Don’t know” (for question 3) //Need to discuss
-    await driver.wait(until.elementLocated(By.xpath(".//span[text() = 'Completely confident']")), 10000);
-    await driver.executeScript("window.scrollBy(0,500)");
+    await wait(By.xpath(".//div[@class = 'poll-question multichoice_radio']"));
+    await scroll(500);
     await click(By.xpath(".//span[text() = \"Don't know\"]")); //Need to discuss
 
     // Step 10 - Select the option “Quite confident” (for question 4) //Need to discuss
@@ -53,6 +62,8 @@ async function runTest() {
     // await driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))[1].click();
     // const question = [driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))];
     // console.log("list size is ->" + question.length);//
+
+
     // Step 11 - Click the button “Next”
     await click(nextBtn);
 
@@ -67,7 +78,7 @@ async function runTest() {
     await click(nextBtn);
 
     // Step 15 - Once the page loads, in the input field for question 6 insert the text “Make learning more relevant.”
-    await driver.wait(until.elementLocated(By.xpath(".//textarea[@rows = '2']")), 10000);
+    await wait(By.xpath(".//textarea[@rows = '2']"));
     await driver.findElement(By.xpath(".//textarea[@rows = '2']")).sendKeys("Make learning more relevant.");
 
     // Step 16 - Click the button “Finish survey”
