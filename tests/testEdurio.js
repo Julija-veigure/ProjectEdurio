@@ -18,6 +18,10 @@ async function runTest() {
         return driver.executeScript("arguments[0].scrollIntoView();", driver.findElement(locator))
     }
 
+    function typeText(locator, text){
+        return driver.findElement(locator).sendKeys(text);
+    }
+
     let driver = await new Builder().forBrowser("chrome").build();
     // window.maximize();
 
@@ -46,7 +50,7 @@ async function runTest() {
     await click(By.xpath(".//div[@class = 'poll-comment']"));
 
     // Step 7 - In the input field that appeared insert the text “We joined only 3 months ago.”
-    await driver.findElement(By.xpath(".//textarea[@autofocus = 'autofocus']")).sendKeys("We joined only 3 months ago.");
+    await typeText(By.xpath(".//textarea[@autofocus = 'autofocus']"),"We joined only 3 months ago.");
 
     // Step 8 - Click the button “Next”.
     await click(nextBtn);
@@ -77,7 +81,7 @@ async function runTest() {
 
     // Step 15 - Once the page loads, in the input field for question 6 insert the text “Make learning more relevant.”
     await wait(By.xpath(".//textarea[@rows = '2']"));
-    await driver.findElement(By.xpath(".//textarea[@rows = '2']")).sendKeys("Make learning more relevant.");
+    await typeText(By.xpath(".//textarea[@rows = '2']"),"Make learning more relevant.");
 
     // Step 16 - Click the button “Finish survey”
     await click(nextBtn);
