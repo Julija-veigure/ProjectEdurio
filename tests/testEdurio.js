@@ -14,7 +14,7 @@ async function runTest() {
 
     // Step 3 - Click the button “Start the poll”
     await driver.executeScript("window.scrollBy(0,100)")
-    await driver.wait(until.elementLocated(By.xpath(".//button[text() = 'Start the poll']")), 10000).click();
+    await driver.wait(until.elementLocated(By.xpath(".//button[text() = 'Start the survey']")), 10000).click();
 
     // Step 4 - Once the page loads, select the option “Year 3” and click the button “Next”
     await driver.wait(until.elementLocated(By.xpath(".//span[text() = 'Year 3']")), 10000).click();
@@ -40,10 +40,10 @@ async function runTest() {
     await driver.findElement(By.xpath(".//span[text() = \"Don't know\"]")).click(); //Need to discuss
 
     // Step 10 - Select the option “Quite confident” (for question 4) //Need to discuss
-    await driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))[1].click();
+    await driver.findElement(By.xpath(".//span[text() = 'Quite confident']")).click();
+    // await driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))[1].click();
     // const question = [driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))];
     // console.log("list size is ->" + question.length);//
-
     // Step 11 - Click the button “Next”
     await driver.wait(until.elementLocated(nextBtn), 10000).click();
 
