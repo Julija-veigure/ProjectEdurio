@@ -39,70 +39,39 @@ async function runTest() {
         return driver.findElement(locator).sendKeys(text);
     }
 
-    // window.maximize();
-
-    // Step 1 - Open the link
+    driver.manage().window().maximize();
     await driver.get("https://edurio.com/teacher/poll/TftMJA");
     console.log("The survey is opened")
-
-    // Step 2 - Accept cookies by clicking “OK”
     await click(acptBtn);
-
-    // Step 3 - Click the button “Start the poll”
     await scroll(200);
     await click(startSrv);
-
-    // Step 4 - Once the page loads, select the option “Year 3” and click the button “Next”
     await click(answer1);
     await click(nextBtn);
-
-    // Step 5 - Once the page loads, select the option “Quite satisfied”
     await wait(By.xpath(".//div[@class = 'poll-question multichoice_radio']"));
     await scroll(200);
     await click(answer2);
-
-    // Step 6 - Click on the “Click here to further explain or specify your answer” element
     await scroll(200);
     await click(answer2Comment);
-
-    // Step 7 - In the input field that appeared insert the text “We joined only 3 months ago.”
     await typeText(answ2CommentField, answ2CommentText);
-
-    // Step 8 - Click the button “Next”.
     await click(nextBtn);
-
-    // Step 9 - Once the page loads, select the option “Don’t know” (for question 3) //Need to discuss
     await wait(By.xpath(".//div[@class = 'poll-question multichoice_radio']"));
     await scroll(500);
-    await click(answer3);
 
-    // Step 10 - Select the option “Quite confident” (for question 4) //Need to discuss
+    // Need to discuss
+    await click(answer3);
     await click(answer4);
     // await driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))[1].click();
     // const question = [driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))];
     // console.log("list size is ->" + question.length);//
 
-    // Step 11 - Click the button “Next”
     await click(nextBtn);
-
-    // Step 12 - Once the page loads, select the options “By e-mail”
     await click(answer5first);
-
-    // Step 13 - Select the options “From my child”
     await scrollTill(answer5second);
     await click(answer5second);
-
-    // Step 14 - Click the button “Next”
     await click(nextBtn);
-
-    // Step 15 - Once the page loads, in the input field for question 6 insert the text “Make learning more relevant.”
     await wait(answer6);
     await typeText(answer6, answer6Text);
-
-    // Step 16 - Click the button “Finish survey”
     await click(nextBtn);
-
-    // Step 17 - On the confirmation modal click the button “Finish survey”
     await click(finishSrvBtn);
 
 }
