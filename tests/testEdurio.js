@@ -31,7 +31,6 @@ async function runTest() {
     // Step 3 - Click the button “Start the poll”
     await scroll(200)
     await click(By.xpath(".//button[text() = 'Start the survey']"));
-    // await driver.wait(until.elementLocated(By.xpath(".//button[text() = 'Start the survey']")), 10000).click();
 
     // Step 4 - Once the page loads, select the option “Year 3” and click the button “Next”
     await click(By.xpath(".//span[text() = 'Year 3']"));
@@ -55,14 +54,13 @@ async function runTest() {
     // Step 9 - Once the page loads, select the option “Don’t know” (for question 3) //Need to discuss
     await wait(By.xpath(".//div[@class = 'poll-question multichoice_radio']"));
     await scroll(500);
-    await click(By.xpath(".//span[text() = \"Don't know\"]")); //Need to discuss
+    await click(By.xpath(".//span[text() = \"Don't know\"]"));
 
     // Step 10 - Select the option “Quite confident” (for question 4) //Need to discuss
     await click(By.xpath(".//span[text() = 'Quite confident']"));
     // await driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))[1].click();
     // const question = [driver.findElements(By.xpath(".//span[text() = 'Quite confident']"))];
     // console.log("list size is ->" + question.length);//
-
 
     // Step 11 - Click the button “Next”
     await click(nextBtn);
